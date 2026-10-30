@@ -3,23 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Magdalena Báez — Lic. en Psicología</title>
-<meta name="description" content="Currículum de Magdalena Báez, Licenciada en Psicología (Pontificia Universidad Católica Argentina).">
+<title>Magdalena Baez — Lic. en Psicología</title>
+<meta name="description" content="Currículum de Magdalena Baez, Licenciada en Psicología (Pontificia Universidad Católica Argentina).">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#f4ece6">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cutive+Mono&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <div class="intro" aria-hidden="true">
-	<svg class="intro-ring" viewBox="0 0 200 200"><circle cx="100" cy="100" r="92"/></svg>
-	<div class="intro-mono"><span>M</span><span>B</span></div>
-	<p class="intro-sub">Lic. en Psicología</p>
+	<div class="intro-type">
+		<div class="intro-name" data-type="Magdalena Baez" data-start=".3" data-step=".065"></div>
+		<div class="intro-sub" data-type="Licenciada en Psicología" data-start="1.4" data-step=".035"></div>
+	</div>
 </div>
 
 <div class="blobs" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -28,11 +29,11 @@
 
 	<header class="top">
 		<div class="photo">
-			<img src="foto.jpg" alt="Magdalena Báez" width="330" height="411">
+			<img src="foto.jpg" alt="Magdalena Baez" width="330" height="411">
 			<svg class="sprig" viewBox="0 0 80 80" aria-hidden="true"><path d="M10 72 C30 52 44 34 70 8"/><path d="M28 54 c-10 -2 -16 -10 -16 -18 c9 2 15 9 16 18Z"/><path d="M40 40 c-2 -10 2 -19 10 -22 c1 9 -3 17 -10 22Z"/><path d="M36 46 c8 -6 18 -6 24 0 c-8 5 -17 5 -24 0Z"/><path d="M52 26 c6 -6 14 -6 18 -2 c-6 5 -13 6 -18 2Z"/></svg>
 		</div>
 		<div class="id">
-			<h1 class="name" aria-label="Magdalena Báez">Magdalena Báez</h1>
+			<h1 class="name" aria-label="Magdalena Baez">Magdalena Baez</h1>
 			<p class="role">Lic. en Psicología</p>
 			<ul class="contact">
 				<li><a href="mailto:magdalenabbaez@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m3 7 9 7 9-7"/></svg>magdalenabbaez@gmail.com</a></li>
@@ -138,9 +139,9 @@
 </main>
 
 <footer class="legal">
-	<p class="sign">Magdalena Báez</p>
-	<p>© <span class="year">2026</span> Magdalena Báez · magda.com.ar · Todos los derechos reservados.</p>
-	<p>El contenido, la fotografía y el currículum son propiedad de Magdalena Báez y no pueden reproducirse sin su autorización.</p>
+	<p class="sign">Magdalena Baez</p>
+	<p>© <span class="year">2026</span> Magdalena Baez · magda.com.ar · Todos los derechos reservados.</p>
+	<p>El contenido, la fotografía y el currículum son propiedad de Magdalena Baez y no pueden reproducirse sin su autorización.</p>
 	<p>Este sitio no usa cookies ni herramientas de seguimiento.</p>
 </footer>
 
@@ -156,11 +157,19 @@ document.querySelector('.year').textContent = new Date().getFullYear();
 const name = document.querySelector('.name');
 let n = 0;
 name.innerHTML = name.textContent.split(' ').map(w =>
-	'<span class="word">' + [...w].map(c => `<span class="ch" aria-hidden="true" style="animation-delay:${2.05 + n++ * .045}s">${c}</span>`).join('') + '</span>'
+	'<span class="word">' + [...w].map(c => `<span class="ch" aria-hidden="true" style="animation-delay:${2.85 + n++ * .045}s">${c}</span>`).join('') + '</span>'
 ).join(' ');
 
 // Escalonado de las secciones
-document.querySelectorAll('.r').forEach((el, i) => { el.style.animationDelay = `${2.5 + i * .12}s`; });
+document.querySelectorAll('.r').forEach((el, i) => { el.style.animationDelay = `${3.3 + i * .12}s`; });
+
+// La intro se tipea letra por letra
+document.querySelectorAll('[data-type]').forEach(el => {
+	const start = +el.dataset.start, step = +el.dataset.step;
+	el.innerHTML = [...el.dataset.type].map((c, i) =>
+		`<span class="c" style="animation-delay:${(start + i * step).toFixed(3)}s">${c === ' ' ? '&nbsp;' : c}</span>`
+	).join('') + '<span class="cur">|</span>';
+});
 
 // La intro se saca del DOM cuando termina
 const intro = document.querySelector('.intro');
